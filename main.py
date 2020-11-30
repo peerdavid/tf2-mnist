@@ -35,17 +35,19 @@ for _ in range(num_hidden_layer):
 
 network_layers.append(tf.keras.layers.Dense(number_classes))
 
-# Create model
 model = tf.keras.models.Sequential(network_layers)
 
-# Difference with / without sofmatx
+# Show some predictions of the untrained model
 predictions = model(x_train[:1]).numpy()
 softmax_predictions = tf.nn.softmax(predictions).numpy()
 
 print(predictions)
 print(softmax_predictions)
 
+
+#
 # Define the loss function i.e. our "goal"
+#
 loss_fn = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
 model.compile(optimizer='adam',
               loss=loss_fn,
